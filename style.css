@@ -1,0 +1,38 @@
+/*
+Theme Name: Delanada Basic
+Theme URI: http://mi-sitio.com
+Author: Tu Nombre
+Author URI: http://tu-sitio.com
+Description: Un tema básico para mi sitio web.
+Version: 1.0
+License: GPL2
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: mi-tema
+*/
+
+/* Aquí empieza el CSS del tema */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+a {
+    color: #0073aa;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
