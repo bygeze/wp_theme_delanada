@@ -1,28 +1,41 @@
 import * as React from "react";
-import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-const TooltipProvider = TooltipPrimitive.Provider;
+type TooltipProps = {
+  content: React.ReactNode;
+  children: React.ReactNode;
+  side?: "top" | "bottom" | "left" | "right";
+};
 
-const Tooltip = TooltipPrimitive.Root;
+export const Tooltip: React.FC<TooltipProps> = ({ content, children, side = "top" }) => {
+  const [open, setOpen] = React.useState(false);
 
-const TooltipTrigger = TooltipPrimitive.Trigger;
-
-const TooltipContent = React.forwardRef<
-  React.ElementRef<typeof TooltipPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
->(({ className, sideOffset = 4, ...props }, ref) => (
-  <TooltipPrimitive.Content
-    ref={ref}
-    sideOffset={sideOffset}
-    className={cn(
-      "z-50 overflow-hidden rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-      className,
-    )}
-    {...props}
-  />
-));
-TooltipContent.displayName = TooltipPrimitive.Content.displayName;
-
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
+  return (
+    <div
+      className="relative inline-block"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      {children}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: side === "top" ? -4 : 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: side === "top" ? -4 : 4 }}
+            className={cn(
+              "absolute z-50 whitespace-nowrap rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md",
+              side === "top" ? "bottom-full left-1/2 -translate-x-1/2 mb-2" : "",
+              side === "bottom" ? "top-full left-1/2 -translate-x-1/2 mt-2" : "",
+              side === "left" ? "right-full top-1/2 -translate-y-1/2 mr-2" : "",
+              side === "right" ? "left-full top-1/2 -translate-y-1/2 ml-2" : ""
+            )}
+          >
+            {content}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
