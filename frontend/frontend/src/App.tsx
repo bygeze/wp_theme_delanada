@@ -1,8 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { ToastProvider } from "@/components/ui/toast";
+import Index from "./pages/Index";
 
+const App = () => (
+  <TooltipProvider>
+    <ToastProvider>
+      <Index />
+    </ToastProvider>
+  </TooltipProvider>
+);
+
+export default App;
+
+/*
 function App() {
   const [count, setCount] = useState(0)
 
@@ -32,4 +42,4 @@ function App() {
   )
 }
 
-export default App
+*/
