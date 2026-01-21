@@ -1,24 +1,37 @@
-# Node modules
+# --------------------
+# Node / Build system
+# --------------------
 node_modules/
-
-# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Vite / build cache
+.vite/
+.cache/
+
+# --------------------
+# Environment
+# --------------------
+.env
+.env.*
+
+# --------------------
 # OS / Editor files
+# --------------------
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
 
-# WordPress core y plugins
-wp-admin/
-wp-includes/
-wp-content/plugins/
-
-# WordPress uploads
+# --------------------
+# WordPress (theme context)
+# --------------------
+# Uploads (never versioned)
 wp-content/uploads/
 
-# Configs locales
-.env
+# --------------------
+# Optional: build artifacts
+# --------------------
+# ❌ NO ignoramos dist/ porque lo usamos en producción
+# dist/
